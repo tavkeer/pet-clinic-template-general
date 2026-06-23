@@ -3,10 +3,11 @@ import { ArrowRight, CalendarCheck, PlayCircle, ShieldPlus, Star } from "lucide-
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Particles } from "@/components/magic/particles";
-import { LightRays } from "@/components/magic/light-rays";
+import SideRays from "@/components/magic/side-rays";
 import { SplitText } from "@/components/magic/split-text";
 import { ShinyText } from "@/components/magic/shiny-text";
 import { RotatingText } from "@/components/magic/rotating-text";
+import { useTheme } from "@/components/theme-provider";
 import { clinic, testimonials, trustHighlights } from "@/data/site";
 import { unsplash } from "@/lib/utils";
 
@@ -23,15 +24,30 @@ const floatCard =
   "glass absolute z-20 flex items-center gap-3 rounded-2xl border border-border/70 p-3 shadow-soft";
 
 export function Hero() {
+  const { resolvedTheme } = useTheme();
+  const isDark = resolvedTheme === "dark";
+
   return (
     <section id="home" className="relative overflow-hidden pt-32 pb-20 sm:pt-36 lg:pt-40">
-      {/* Background: light beam + particle field + soft colour glows */}
-      <div className="absolute inset-0 -z-10 overflow-hidden text-primary">
-        <div className="absolute inset-0 bg-grid opacity-50 mask-fade-b" />
-        <LightRays />
-        <Particles className="opacity-70" quantity={80} />
-        <div className="absolute -left-24 top-0 h-[30rem] w-[30rem] animate-float-slow rounded-full bg-primary/15 blur-[120px]" />
-        <div className="absolute right-0 top-1/3 h-[26rem] w-[26rem] animate-float rounded-full bg-accent/30 blur-[120px]" />
+      {/* Background: ReactBits SideRays light beams + particle field + grid */}
+      <div className="absolute inset-0 -z-10 overflow-hidden">
+        <div className="absolute inset-0 bg-grid opacity-40 mask-fade-b" />
+        <div className="absolute inset-0">
+          <SideRays
+            origin="top-right"
+            rayColor1="#16c4ac"
+            rayColor2="#ffc97a"
+            speed={2}
+            intensity={isDark ? 2.2 : 1.7}
+            spread={1.7}
+            tilt={0}
+            saturation={1.3}
+            blend={0.6}
+            falloff={1.8}
+            opacity={isDark ? 0.95 : 0.6}
+          />
+        </div>
+        <Particles className="opacity-50" quantity={60} />
       </div>
 
       <div className="mx-auto grid max-w-7xl items-center gap-14 px-4 sm:px-6 lg:grid-cols-2 lg:gap-10 lg:px-8">

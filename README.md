@@ -20,7 +20,8 @@ light/dark theme** that you can re-skin in seconds using [tweakcn](https://tweak
   - **SplitText** — characters fade + rise + de-blur into view (hero headline & every section title)
   - **ShinyText** — light streak sweeping across labels
   - **RotatingText** — cycling per-character word animation in the hero
-  - **LightRays** — volumetric "god ray" light beams + a sweeping laser scan over the hero
+  - **SideRays** — the real ReactBits WebGL light-rays shader (via OGL), themed to your palette
+    and tuned per light/dark mode in the hero
   - **Particles** — on-theme canvas particle field that reacts to the cursor
   - Aurora gradient background, animated "laser" gradient text, cursor-following spotlight
     cards, seamless dual-direction marquee, scroll reveals & animated counters
@@ -118,8 +119,8 @@ src/
    ├─ theme-toggle.tsx
    ├─ scroll-to-top.tsx
    ├─ ui/                    # Button, Badge, SectionHeading, form fields
-   ├─ magic/                 # LightRays, SplitText, ShinyText, RotatingText, Particles,
-   │                         # Spotlight, Aurora, Reveal, Marquee, CountUp, SpotlightCard
+   ├─ magic/                 # side-rays (ReactBits/OGL), SplitText, ShinyText, RotatingText,
+   │                         # Particles, Aurora, Reveal, Marquee, CountUp, SpotlightCard
    └─ sections/              # Navbar, Hero, Stats, Services, About, WhyChoose,
                              # Shop, Appointment, Team, Testimonials, CTA,
                              # Contact, Footer
@@ -159,7 +160,10 @@ your API, [Formspree](https://formspree.io), [Resend](https://resend.com), or a 
 
 ## 📦 Tech stack
 
-React 19 · Vite 6 · TypeScript 5 · Tailwind CSS v4 · Framer Motion 11 · lucide-react
+React 19 · Vite 6 · TypeScript 5 · Tailwind CSS v4 · Framer Motion 11 · OGL (WebGL) · lucide-react
+
+> The hero light effect uses **ReactBits SideRays** (lightweight OGL/WebGL). The heavier
+> **LaserFlow** effect (dark neon, needs `three`) can be swapped in on request.
 
 ## 📄 License & credits
 
