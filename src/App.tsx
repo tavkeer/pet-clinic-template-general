@@ -3,6 +3,7 @@ import { Hero } from "@/components/sections/hero";
 import { Stats } from "@/components/sections/stats";
 import { Services } from "@/components/sections/services";
 import { About } from "@/components/sections/about";
+import { VelocityBanner } from "@/components/sections/velocity-banner";
 import { WhyChoose } from "@/components/sections/why-choose";
 import { Shop } from "@/components/sections/shop";
 import { Appointment } from "@/components/sections/appointment";
@@ -22,6 +23,7 @@ export default function App() {
         <Stats />
         <Services />
         <About />
+        <VelocityBanner />
         <WhyChoose />
         <Shop />
         <Appointment />
