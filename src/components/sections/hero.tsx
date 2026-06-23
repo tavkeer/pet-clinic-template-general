@@ -2,7 +2,11 @@ import { motion } from "framer-motion";
 import { ArrowRight, CalendarCheck, PlayCircle, ShieldPlus, Star } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { AuroraBackground } from "@/components/magic/aurora-background";
+import { Particles } from "@/components/magic/particles";
+import { Spotlight } from "@/components/magic/spotlight";
+import { SplitText } from "@/components/magic/split-text";
+import { ShinyText } from "@/components/magic/shiny-text";
+import { RotatingText } from "@/components/magic/rotating-text";
 import { clinic, testimonials, trustHighlights } from "@/data/site";
 import { unsplash } from "@/lib/utils";
 
@@ -21,7 +25,14 @@ const floatCard =
 export function Hero() {
   return (
     <section id="home" className="relative overflow-hidden pt-32 pb-20 sm:pt-36 lg:pt-40">
-      <AuroraBackground />
+      {/* Background: light beam + particle field + soft colour glows */}
+      <div className="absolute inset-0 -z-10 overflow-hidden text-primary">
+        <div className="absolute inset-0 bg-grid opacity-50 mask-fade-b" />
+        <Particles className="opacity-70" quantity={90} />
+        <Spotlight />
+        <div className="absolute -left-24 top-0 h-[30rem] w-[30rem] animate-float-slow rounded-full bg-primary/15 blur-[120px]" />
+        <div className="absolute right-0 top-1/3 h-[26rem] w-[26rem] animate-float rounded-full bg-accent/30 blur-[120px]" />
+      </div>
 
       <div className="mx-auto grid max-w-7xl items-center gap-14 px-4 sm:px-6 lg:grid-cols-2 lg:gap-10 lg:px-8">
         {/* Copy */}
@@ -39,37 +50,35 @@ export function Hero() {
                   />
                 ))}
               </span>
-              <span className="text-foreground">Loved by 12,000+ pet parents</span>
+              <ShinyText text="Loved by 12,000+ pet parents" className="font-semibold" speed={4} />
             </Badge>
           </motion.div>
 
-          <motion.h1
-            variants={item}
+          <SplitText
+            as="h1"
+            text="Compassionate care for your furry family"
+            highlight={["furry", "family"]}
+            highlightClassName="text-gradient-animate"
             className="font-display text-4xl font-bold leading-[1.05] tracking-tight text-foreground sm:text-5xl lg:text-6xl"
-          >
-            Compassionate care for your{" "}
-            <span className="relative whitespace-nowrap">
-              <span className="text-gradient-animate">furry family</span>
-              <svg
-                className="absolute -bottom-2 left-0 w-full text-primary/40"
-                viewBox="0 0 300 12"
-                fill="none"
-                aria-hidden
-              >
-                <path
-                  d="M2 9C70 3 230 3 298 9"
-                  stroke="currentColor"
-                  strokeWidth="4"
-                  strokeLinecap="round"
-                />
-              </svg>
-            </span>
-          </motion.h1>
+            delay={0.15}
+            stagger={0.022}
+          />
 
           <motion.p variants={item} className="max-w-xl text-lg leading-relaxed text-muted-foreground">
             From routine check-ups to round-the-clock emergencies, {clinic.name} blends advanced
             medicine with a gentle, fear-free touch — so every visit feels like a walk in the park.
           </motion.p>
+
+          <motion.div
+            variants={item}
+            className="flex flex-wrap items-center gap-x-2 gap-y-1 text-xl font-semibold text-foreground"
+          >
+            <span>Expert care for</span>
+            <RotatingText
+              words={["dogs 🐕", "cats 🐈", "rabbits 🐇", "birds 🦜", "every companion 🐾"]}
+              className="text-primary"
+            />
+          </motion.div>
 
           <motion.div variants={item} className="flex flex-wrap items-center gap-3">
             <Button href="#appointment" size="lg">
@@ -115,7 +124,7 @@ export function Hero() {
           <motion.img
             src={unsplash("1518717758536-85ae29035b6d", 240, 240)}
             alt="Content cat"
-            className="absolute -bottom-6 -left-6 z-20 hidden size-28 rounded-2xl border-4 border-card object-cover shadow-soft sm:block animate-float-slow"
+            className="absolute -bottom-6 -left-6 z-20 hidden size-28 animate-float-slow rounded-2xl border-4 border-card object-cover shadow-soft sm:block"
             loading="lazy"
           />
 

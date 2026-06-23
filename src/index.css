@@ -178,6 +178,7 @@
   --animate-float-slow: float 11s ease-in-out infinite;
   --animate-shimmer: shimmer 3.5s linear infinite;
   --animate-pulse-ring: pulse-ring 3s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  --animate-spotlight: spotlight 2.2s ease 0.4s 1 forwards;
 }
 
 @keyframes marquee {
@@ -208,6 +209,10 @@
 }
 @keyframes text-flow {
   to { background-position: 220% center; }
+}
+@keyframes spotlight {
+  0% { opacity: 0; transform: translate(-72%, -62%) scale(0.5); }
+  100% { opacity: 1; transform: translate(-50%, -40%) scale(1); }
 }
 
 /*

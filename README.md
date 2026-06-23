@@ -17,11 +17,13 @@ light/dark theme** that you can re-skin in seconds using [tweakcn](https://tweak
 - **tweakcn / shadcn token system** — semantic colours (`--primary`, `--background`, `--accent`, …) in
   `oklch`, ready to paste a new theme over.
 - **Premium motion** — hand-built animated components inspired by ReactBits / Aceternity UI:
-  - Aurora gradient background
-  - Animated "laser" flowing-gradient headline
-  - Cursor-following spotlight cards
-  - Seamless dual-direction marquee
-  - Scroll-reveal animations & animated stat counters
+  - **SplitText** — characters fade + rise + de-blur into view (hero headline & every section title)
+  - **ShinyText** — light streak sweeping across labels
+  - **RotatingText** — cycling per-character word animation in the hero
+  - **Spotlight** — soft animated light beam over the hero
+  - **Particles** — on-theme canvas particle field that reacts to the cursor
+  - Aurora gradient background, animated "laser" gradient text, cursor-following spotlight
+    cards, seamless dual-direction marquee, scroll reveals & animated counters
 - **Interactive bits** — product category filter + add-to-cart feedback, working booking & contact
   forms with success states, mobile menu, scroll-to-top.
 - **Real imagery** — curated Unsplash photography via a tiny helper, swappable in one place.
@@ -116,7 +118,8 @@ src/
    ├─ theme-toggle.tsx
    ├─ scroll-to-top.tsx
    ├─ ui/                    # Button, Badge, SectionHeading, form fields
-   ├─ magic/                 # Aurora, Reveal, Marquee, CountUp, SpotlightCard
+   ├─ magic/                 # SplitText, ShinyText, RotatingText, Spotlight,
+   │                         # Particles, Aurora, Reveal, Marquee, CountUp, SpotlightCard
    └─ sections/              # Navbar, Hero, Stats, Services, About, WhyChoose,
                              # Shop, Appointment, Team, Testimonials, CTA,
                              # Contact, Footer
