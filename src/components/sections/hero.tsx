@@ -34,20 +34,20 @@ export function Hero() {
         <div className="absolute inset-0 bg-grid opacity-40 mask-fade-b" />
         <div className="absolute inset-0">
           <SideRays
-            origin="top-right"
+            origin="top-left"
             rayColor1="#16c4ac"
             rayColor2="#ffc97a"
-            speed={2}
-            intensity={isDark ? 2.2 : 1.7}
-            spread={1.7}
+            speed={2.5}
+            intensity={isDark ? 3.6 : 2.7}
+            spread={2}
             tilt={0}
-            saturation={1.3}
-            blend={0.6}
-            falloff={1.8}
-            opacity={isDark ? 0.95 : 0.6}
+            saturation={1.4}
+            blend={0.5}
+            falloff={1.1}
+            opacity={isDark ? 1 : 0.75}
           />
         </div>
-        <Particles className="opacity-50" quantity={60} />
+        <Particles className="opacity-70" quantity={70} />
       </div>
 
       <div className="mx-auto grid max-w-7xl items-center gap-14 px-4 sm:px-6 lg:grid-cols-2 lg:gap-10 lg:px-8">
