@@ -1,5 +1,6 @@
 import { AuroraText } from "@/components/magic/aurora-text";
 import { Reveal } from "@/components/magic/reveal";
+import { Tilt } from "@/components/magic/tilt";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { whyChoose } from "@/data/site";
@@ -35,18 +36,20 @@ export function WhyChoose() {
         {/* Right — feature grid */}
         <div className="grid gap-5 sm:grid-cols-2">
           {whyChoose.map((feature, i) => (
-            <Reveal key={feature.title} delay={(i % 2) * 0.08}>
-              <div className="group h-full rounded-2xl border border-border bg-card p-6 shadow-soft transition-all duration-300 hover:-translate-y-1 hover:border-primary/30">
-                <span className="grid size-12 place-items-center rounded-xl bg-gradient-to-br from-primary/15 to-accent/40 text-primary">
-                  <feature.icon className="size-6" />
-                </span>
-                <h3 className="mt-5 font-display text-lg font-semibold text-foreground">
-                  {feature.title}
-                </h3>
-                <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
-                  {feature.description}
-                </p>
-              </div>
+            <Reveal key={feature.title} delay={(i % 2) * 0.08} className="h-full">
+              <Tilt max={8} scale={1.03} className="h-full rounded-2xl">
+                <div className="group h-full rounded-2xl border border-border bg-card p-6 shadow-soft transition-all duration-300 hover:border-primary/30">
+                  <span className="grid size-12 place-items-center rounded-xl bg-gradient-to-br from-primary/15 to-accent/40 text-primary">
+                    <feature.icon className="size-6" />
+                  </span>
+                  <h3 className="mt-5 font-display text-lg font-semibold text-foreground">
+                    {feature.title}
+                  </h3>
+                  <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
+                    {feature.description}
+                  </p>
+                </div>
+              </Tilt>
             </Reveal>
           ))}
         </div>

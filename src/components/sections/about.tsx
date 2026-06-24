@@ -1,6 +1,8 @@
 import { Check, PhoneCall } from "lucide-react";
 import { AuroraText } from "@/components/magic/aurora-text";
 import { Reveal } from "@/components/magic/reveal";
+import { Parallax } from "@/components/magic/parallax";
+import { Tilt } from "@/components/magic/tilt";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { aboutPoints, clinic } from "@/data/site";
@@ -12,15 +14,17 @@ export function About() {
       <div className="mx-auto grid max-w-7xl items-center gap-14 px-4 sm:px-6 lg:grid-cols-2 lg:gap-16 lg:px-8">
         {/* Images */}
         <Reveal direction="right" className="relative">
-          <div className="relative grid grid-cols-5 grid-rows-6 gap-4">
-            <div className="col-span-3 row-span-6 overflow-hidden rounded-3xl border border-border shadow-soft">
-              <img
-                src={unsplash("1559190394-df5a28aab5c5", 600, 760)}
-                alt="Veterinarian caring for a dog"
-                className="h-full w-full object-cover"
-                loading="lazy"
-              />
-            </div>
+          <Parallax speed={0.18} className="relative grid grid-cols-5 grid-rows-6 gap-4">
+            <Tilt max={9} scale={1.02} className="col-span-3 row-span-6 rounded-3xl">
+              <div className="h-full overflow-hidden rounded-3xl border border-border shadow-soft">
+                <img
+                  src={unsplash("1559190394-df5a28aab5c5", 600, 760)}
+                  alt="Veterinarian caring for a dog"
+                  className="h-full w-full object-cover"
+                  loading="lazy"
+                />
+              </div>
+            </Tilt>
             <div className="col-span-2 row-span-3 overflow-hidden rounded-3xl border border-border shadow-soft">
               <img
                 src={unsplash("1601758228041-f3b2795255f1", 400, 360)}
@@ -37,7 +41,7 @@ export function About() {
                 loading="lazy"
               />
             </div>
-          </div>
+          </Parallax>
 
           {/* Experience badge */}
           <div className="glass absolute -bottom-6 left-1/2 flex -translate-x-1/2 items-center gap-3 rounded-2xl border border-border/70 px-5 py-3 shadow-elevated">

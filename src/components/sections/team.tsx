@@ -1,6 +1,7 @@
 import { Instagram, Linkedin, Twitter } from "lucide-react";
 import { SectionHeading } from "@/components/ui/section-heading";
 import { Reveal } from "@/components/magic/reveal";
+import { Tilt } from "@/components/magic/tilt";
 import { team } from "@/data/site";
 
 export function Team() {
@@ -17,7 +18,8 @@ export function Team() {
         <div className="mt-16 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
           {team.map((member, i) => (
             <Reveal key={member.name} delay={(i % 4) * 0.08}>
-              <div className="group relative overflow-hidden rounded-3xl border border-border bg-card shadow-soft transition-all duration-300 hover:-translate-y-1 hover:shadow-elevated">
+              <Tilt max={10} scale={1.03} className="rounded-3xl">
+              <div className="group relative overflow-hidden rounded-3xl border border-border bg-card shadow-soft transition-all duration-300 hover:shadow-elevated">
                 <div className="relative aspect-[4/5] overflow-hidden">
                   <img
                     src={member.image}
@@ -51,6 +53,7 @@ export function Team() {
                   </div>
                 </div>
               </div>
+              </Tilt>
             </Reveal>
           ))}
         </div>

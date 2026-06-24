@@ -1,6 +1,7 @@
 import { ArrowUpRight } from "lucide-react";
 import { SectionHeading } from "@/components/ui/section-heading";
 import { SpotlightCard } from "@/components/magic/spotlight-card";
+import { Tilt } from "@/components/magic/tilt";
 import { Reveal } from "@/components/magic/reveal";
 import { Badge } from "@/components/ui/badge";
 import { services } from "@/data/site";
@@ -18,8 +19,9 @@ export function Services() {
 
         <div className="mt-16 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
           {services.map((service, i) => (
-            <Reveal key={service.title} delay={(i % 4) * 0.08}>
-              <SpotlightCard className="h-full">
+            <Reveal key={service.title} delay={(i % 4) * 0.08} className="h-full">
+              <Tilt max={9} scale={1.03} className="h-full rounded-2xl">
+                <SpotlightCard className="h-full">
                 <div className="flex h-full flex-col gap-4 p-6">
                   <div className="flex items-start justify-between">
                     <span className="grid size-12 place-items-center rounded-xl bg-primary/10 text-primary transition-colors duration-300 group-hover:bg-primary group-hover:text-primary-foreground">
@@ -42,7 +44,8 @@ export function Services() {
                     Learn more <ArrowUpRight className="size-4" />
                   </a>
                 </div>
-              </SpotlightCard>
+                </SpotlightCard>
+              </Tilt>
             </Reveal>
           ))}
         </div>

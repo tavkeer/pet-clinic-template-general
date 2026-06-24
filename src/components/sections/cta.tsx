@@ -1,6 +1,7 @@
 import { ArrowRight, PawPrint, Phone } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Reveal } from "@/components/magic/reveal";
+import { Tilt } from "@/components/magic/tilt";
 import { clinic } from "@/data/site";
 
 export function CTA() {
@@ -8,6 +9,7 @@ export function CTA() {
     <section className="relative px-4 py-12 sm:px-6 lg:px-8">
       <div className="mx-auto max-w-7xl">
         <Reveal>
+          <Tilt max={5} scale={1.01} glare={false} className="rounded-[2rem]">
           <div className="relative overflow-hidden rounded-[2rem] border border-border bg-gradient-to-br from-primary via-chart-3 to-primary px-6 py-14 text-center text-primary-foreground shadow-elevated sm:px-12 sm:py-20">
             {/* decorative blobs */}
             <div className="pointer-events-none absolute inset-0">
@@ -40,6 +42,7 @@ export function CTA() {
               </div>
             </div>
           </div>
+          </Tilt>
         </Reveal>
       </div>
     </section>
