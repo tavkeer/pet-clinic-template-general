@@ -1,13 +1,12 @@
-import { motion } from "framer-motion";
-import { ArrowRight, CalendarCheck, PlayCircle, ShieldPlus, Star } from "lucide-react";
+import { useRef } from "react";
+import { motion, useScroll, useTransform } from "framer-motion";
+import { ArrowRight, CalendarCheck, ChevronDown, PlayCircle, ShieldPlus, Star } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { Particles } from "@/components/magic/particles";
-import SideRays from "@/components/magic/side-rays";
 import { SplitText } from "@/components/magic/split-text";
 import { ShinyText } from "@/components/magic/shiny-text";
 import { MorphingText } from "@/components/magic/morphing-text";
-import { useTheme } from "@/components/theme-provider";
+import { Tilt } from "@/components/magic/tilt";
 import { clinic, testimonials, trustHighlights } from "@/data/site";
 import { unsplash } from "@/lib/utils";
 
@@ -24,35 +23,39 @@ const floatCard =
   "glass absolute z-20 flex items-center gap-3 rounded-2xl border border-border/70 p-3 shadow-soft";
 
 export function Hero() {
-  const { resolvedTheme } = useTheme();
-  const isDark = resolvedTheme === "dark";
+  const sectionRef = useRef<HTMLElement>(null);
+
+  // Scroll-jack: drive the hero's "exit" as it scrolls out of frame.
+  const { scrollYProgress } = useScroll({
+    target: sectionRef,
+    offset: ["start start", "end start"],
+  });
+
+  // Text column lifts up and fades faster than the visual (parallax depth).
+  const textY = useTransform(scrollYProgress, [0, 0.7], [0, -120]);
+  const textOpacity = useTransform(scrollYProgress, [0, 0.5], [1, 0]);
+
+  // Visual scales up + drifts as it leaves, like a camera pushing past it.
+  const visualY = useTransform(scrollYProgress, [0, 1], [0, -60]);
+  const visualScale = useTransform(scrollYProgress, [0, 1], [1, 1.12]);
+  const visualOpacity = useTransform(scrollYProgress, [0, 0.85], [1, 0.15]);
+  const cueOpacity = useTransform(scrollYProgress, [0, 0.12], [1, 0]);
 
   return (
-    <section id="home" className="relative overflow-hidden pt-32 pb-20 sm:pt-36 lg:pt-40">
-      {/* Background: ReactBits SideRays light beams + particle field + grid */}
-      <div className="absolute inset-0 -z-10 overflow-hidden">
-        <div className="absolute inset-0 bg-grid opacity-40 mask-fade-b" />
-        <div className="absolute inset-0">
-          <SideRays
-            origin="top-left"
-            rayColor1="#16c4ac"
-            rayColor2="#ffc97a"
-            speed={2.5}
-            intensity={isDark ? 3.6 : 2.7}
-            spread={2}
-            tilt={0}
-            saturation={1.4}
-            blend={0.5}
-            falloff={1.1}
-            opacity={isDark ? 1 : 0.75}
-          />
-        </div>
-        <Particles className="opacity-70" quantity={70} />
-      </div>
-
-      <div className="mx-auto grid max-w-7xl items-center gap-14 px-4 sm:px-6 lg:grid-cols-2 lg:gap-10 lg:px-8">
+    <section
+      id="home"
+      ref={sectionRef}
+      className="relative flex min-h-screen items-center overflow-hidden pb-20 pt-32 sm:pt-36 lg:pt-40"
+    >
+      <div className="mx-auto grid w-full max-w-7xl items-center gap-14 px-4 sm:px-6 lg:grid-cols-2 lg:gap-10 lg:px-8">
         {/* Copy */}
-        <motion.div variants={container} initial="hidden" animate="show" className="flex flex-col items-start gap-6">
+        <motion.div
+          variants={container}
+          initial="hidden"
+          animate="show"
+          style={{ y: textY, opacity: textOpacity }}
+          className="flex flex-col items-start gap-6"
+        >
           <motion.div variants={item}>
             <Badge variant="glass" className="py-2">
               <span className="flex -space-x-2">
@@ -122,19 +125,22 @@ export function Hero() {
           initial={{ opacity: 0, scale: 0.94, y: 30 }}
           animate={{ opacity: 1, scale: 1, y: 0 }}
           transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1], delay: 0.15 }}
+          style={{ y: visualY, scale: visualScale, opacity: visualOpacity }}
           className="relative mx-auto w-full max-w-lg lg:max-w-none"
         >
           {/* glow */}
           <div className="absolute -inset-6 -z-10 rounded-[2.5rem] bg-gradient-to-tr from-primary/20 via-accent/30 to-chart-3/20 blur-2xl" />
 
-          <div className="relative aspect-[4/5] overflow-hidden rounded-[2rem] border border-border shadow-elevated sm:aspect-square">
-            <img
-              src={unsplash("1583337130417-3346a1be7dee", 900, 900)}
-              alt="Veterinarian gently examining a happy dog"
-              className="h-full w-full object-cover"
-            />
-            <div className="absolute inset-0 bg-gradient-to-t from-foreground/30 via-transparent to-transparent" />
-          </div>
+          <Tilt max={14} className="rounded-[2rem]">
+            <div className="relative aspect-[4/5] overflow-hidden rounded-[2rem] border border-border shadow-elevated sm:aspect-square">
+              <img
+                src={unsplash("1583337130417-3346a1be7dee", 900, 900)}
+                alt="Veterinarian gently examining a happy dog"
+                className="h-full w-full object-cover"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-foreground/30 via-transparent to-transparent" />
+            </div>
+          </Tilt>
 
           {/* Secondary floating image */}
           <motion.img
@@ -178,6 +184,23 @@ export function Hero() {
           </div>
         </motion.div>
       </div>
+
+      {/* Scroll cue */}
+      <motion.a
+        href="#services"
+        aria-label="Scroll to explore"
+        style={{ opacity: cueOpacity }}
+        className="absolute inset-x-0 bottom-8 mx-auto flex w-fit flex-col items-center gap-1.5 text-xs font-medium uppercase tracking-widest text-muted-foreground"
+      >
+        Scroll
+        <motion.span
+          animate={{ y: [0, 6, 0] }}
+          transition={{ duration: 1.6, repeat: Infinity, ease: "easeInOut" }}
+          className="grid size-9 place-items-center rounded-full border border-border bg-card/60 text-foreground shadow-soft"
+        >
+          <ChevronDown className="size-4" />
+        </motion.span>
+      </motion.a>
     </section>
   );
 }

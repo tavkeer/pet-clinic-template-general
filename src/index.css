@@ -230,6 +230,13 @@
     -webkit-font-smoothing: antialiased;
   }
 
+  /* When Lenis is driving the page, hand scrolling over to it (avoids the
+     browser's native smooth-scroll fighting Lenis). Reduced-motion users skip
+     Lenis entirely and keep the native smooth behaviour above. */
+  html.lenis {
+    scroll-behavior: auto;
+  }
+
   /* Offset anchored sections so they clear the fixed navbar. */
   section[id] {
     scroll-margin-top: 5.5rem;
